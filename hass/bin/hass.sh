@@ -4,6 +4,8 @@ ACTION=${1:-"run"}
 APP=${2:-"homeassistant"}
 TAG=${3:-${USER}}
 
+WORKDIR=~/Development/docks/hass
+
 if [ $1 = "upgrade" ]
 then
 	echo "Building the upgraded version of Hass"
@@ -17,7 +19,7 @@ echo "Starting Hass"
 docker run -d \
        --restart=always \
        --name=${TAG} \
-       -v ~/Development/home-assistant/config:/config \
+       -v ${WORKDIR}/config:/config \
        -v /etc/localtime:/etc/localtime.ro \
        --net=host \
        homeassistant/home-assistant:${TAG}
