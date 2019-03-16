@@ -1,0 +1,25 @@
+#!/bin/sh
+
+CMD=${1:-"run"}
+APP=${2:-"code-server"}
+TAG=${3:-$USER}
+
+if [ ${CMD} = "build" ]
+then
+	cd ~/Development/${APP}
+	docker build --pull -f Dockerfile --tag ${APP}:${TAG} .
+fi
+
+if [ ${CMD} = "run" ]
+then
+	docker run --tty \
+		   --rm \
+		   -p 172.22.22.245:8443:8443 \
+		   -v "${PWD}:/root/project" \
+		   -v ~/.gitconfig:/root/.gitconfig \
+		   -v ~/.local/share/code-server/:/root/.local/share/code-server/ \
+		   --name ${APP} \
+		   ${APP}:${TAG} \
+		   --allow-http \
+		   --no-auth
+fi
