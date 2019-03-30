@@ -1,5 +1,5 @@
 # docks
-How I use other people's docker containers
+How I use (and extend) other people's docker containers - because sometimes they aren't container enough for me.
 
 # What is it?
 This is just a collection of some of the freely available docker images I use (and possibly abuse) to my own ends.
